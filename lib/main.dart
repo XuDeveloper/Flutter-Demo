@@ -6,44 +6,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'xu',
-      home: new HomePage(),
-    );
-  }
-
-}
-
-
-class HomePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => new _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int index = 0;
-  @override
-  Widget build(BuildContext context) {
-    return new DefaultTabController(
-        child: new Scaffold(
+        title: 'flutter-demo',
+        home: new Scaffold(
           appBar: new AppBar(
-            title: _getTitle(),
+            title: new Text("flutter-demo-xu"),
           ),
-          body: ,
-          drawer: ,
-          bottomNavigationBar: ,
-        )
-    );
+          body: new Center(
+            child: new BackButton(
+              color: new Color(0xFFFFF3E0),
+            ),
+          ),
+        ));
   }
-
-  Widget _getTitle() {
-    switch(index) {
-      case 0:
-        return new Text("电影");
-      case 1:
-        return new Text("图书");
-      case 2:
-        return new Text("音乐");
-    }
-  }
-
 }
