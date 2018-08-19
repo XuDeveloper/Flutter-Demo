@@ -98,31 +98,21 @@ class MyApp extends StatelessWidget {
         children: <Widget>[
           new Expanded(
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Container(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: new Text(
-                        "1111",
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold
-                        ),
-                      )
-                  ),
-                  new Text(
-                    "2222",
-                    style: new TextStyle(
-                        color: Colors.grey
-                    ),
-                  )
-                ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: new Text(
+                    "1111",
+                    style: new TextStyle(fontWeight: FontWeight.bold),
+                  )),
+              new Text(
+                "2222",
+                style: new TextStyle(color: Colors.grey),
               )
-          ),
-          new Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          new Text('41'),
+            ],
+          )),
+          new FavouriteWidget(),
         ],
       ),
     );
@@ -139,10 +129,7 @@ class MyApp extends StatelessWidget {
             child: new Text(
               label,
               style: new TextStyle(
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w400,
-                  color: color
-              ),
+                  fontSize: 12.0, fontWeight: FontWeight.w400, color: color),
             ),
           )
         ],
@@ -181,7 +168,7 @@ class MyApp extends StatelessWidget {
         body: new ListView(
           children: <Widget>[
             Image.asset(
-              'images/lake.png',
+              'images/lake.jpg',
               width: 600.0,
               height: 240.0,
               fit: BoxFit.cover,
@@ -193,8 +180,53 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
 
+class FavouriteWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return new _FavouriteWidgetState();
+  }
+}
 
+class _FavouriteWidgetState extends State<FavouriteWidget> {
+  bool _isFavourite = true;
+  int _count = 41;
+
+  void _toggleState() {
+    setState(() {
+      if (_isFavourite) {
+        _count -= 1;
+        _isFavourite = false;
+      } else {
+        _count += 1;
+        _isFavourite = true;
+      }
+    });
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return new Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        new Container(
+          padding: new EdgeInsets.all(0.0),
+          child: new IconButton(
+              icon: (_isFavourite
+                  ? new Icon(Icons.star)
+                  : new Icon(Icons.star_border)),
+              color: Colors.red[500],
+              onPressed: _toggleState),
+        ),
+        new SizedBox(
+          width: 18.0,
+          child: new Container(
+            child: new Text("$_count"),
+          ),
+        )
+      ],
+    );
+  }
 }
